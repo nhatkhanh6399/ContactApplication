@@ -1,11 +1,11 @@
 package com.nk.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,18 +15,19 @@ import com.nk.service.ContactService;
 import com.nk.service.impl.ContactServiceImpl;
 
 /**
- * Servlet implementation class ContactController
+ * Servlet implementation class EditController
  */
-public class ContactController extends HttpServlet {
+@WebServlet("/EditController")
+public class EditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private ContactService contactService = new ContactServiceImpl();
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContactController() {
-    	
+    public EditController() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -34,27 +35,32 @@ public class ContactController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			this.getListContact(request, response);
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			int id = Integer.parseInt(request.getParameter("id"));
+			String fName = request.getParameter("firstName");
+			String lName = request.getParameter("lastName");
+			Date date = Date.valueOf(request.getParameter("birthDate"));
+			String sex = request.getParameter("sex");
+			boolean gen = false;
+			if(sex == "Male")
+				gen = true;
+			String phoneNumber = request.getParameter("phoneNumber");
+			String des = request.getParameter("description");
+			ContactDTO contact = new ContactDTO(id, fName, lName, date, gen, phoneNumber, des);
+			this.contactService.updateContact(contact);
+			response.sendRedirect("ContactController");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
-		
-	}
-	
-	private void getListContact(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		List<ContactDTO> listEmp = contactService.getAllContacts();
-		request.setAttribute("listContact", listEmp);
-		RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
-		rd.forward(request, response);
 	}
 
 }

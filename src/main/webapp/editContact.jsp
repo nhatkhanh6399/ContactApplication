@@ -24,7 +24,10 @@
 		<div class="row justify-content-md-center">
 			<div class="col-md-6">
 				<h1 class="mx-auto text-center my-3">Add new contact form</h1>
-				<form action="AddController" method="post">
+				<form action="EditController" method="post">
+					<div class="form-group">
+						<input type="hidden" class="form-control" name="id" value="${contact.id}">
+					</div>
 					<div class="form-group">
 						<label>First Name</label>
 						<input type="text" class="form-control" name="firstName" value="${contact.firstName}">
@@ -53,7 +56,7 @@
 						<textarea class="form-control" rows="3" name="description" ><c:out value="${contact.description}" /></textarea>
 					</div>
 					<div class="text-center">
-						<button type="submit" class="btn btn-primary">Create Contact</button>
+						<button type="submit" class="btn btn-primary">Edit Contact</button>
 					</div>
 				</form>
 			</div>

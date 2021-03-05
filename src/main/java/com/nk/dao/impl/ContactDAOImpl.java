@@ -109,7 +109,7 @@ public class ContactDAOImpl implements ContactDAO {
 			boolean sex = resultSet.getBoolean("Sex");
 			String phoneNumber = resultSet.getString("Phone");
 			String description = resultSet.getNString("About");
-			contact = new ContactDTO(firstName, lastName, birthdate, sex, phoneNumber, description);
+			contact = new ContactDTO(id, firstName, lastName, birthdate, sex, phoneNumber, description);
 		}
 		resultSet.close();
 		statement.close();
@@ -118,10 +118,11 @@ public class ContactDAOImpl implements ContactDAO {
 	
 	public static void main(String[] args) throws SQLException {
 //		ContactDAOImpl dao = new ContactDAOImpl();
-//		String str="1990-03-20";  
+//		String str="1999-06-22";  
 //		Date date=Date.valueOf(str);;
 //		
-//		ContactDTO add = new ContactDTO("Sam", "Johnson", date, true, "0122334411", null);
+//		ContactDTO add = new ContactDTO(8, "Elizabeth", "Taylor", date, false, "0112223366", "Hi");
+//		dao.updateContact(add);
 //		dao.addNewContact(add);
 //		List<ContactDTO> list = dao.getAllContacts();
 //		for(ContactDTO o: list) {

@@ -23,7 +23,7 @@
 	<div class="container-fluid">
 		<div class="row justify-content-md-center">
 			<div class="col-md-6">
-				<h1 class="mx-auto text-center my-3">Add new contact form</h1>
+				<h1 class="mx-auto text-center my-3">Add New Contact</h1>
 				<form action="AddController" method="post">
 					<div class="form-group">
 						<label>First Name</label>

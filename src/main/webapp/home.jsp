@@ -25,7 +25,7 @@
 				<th>Sex</th>
 				<th>Phone number</th>
 				<th>About</th>
-				<th>Edit</th>
+				<th>Action</th>
 			<tr>
 			
 			<c:forEach var="i" items="${listContact}">
@@ -37,7 +37,10 @@
 					<td><c:out value="${i.sex == true ? 'Male' : 'Female'}" /></td>
 					<td>${i.phoneNumber}</td>
 					<td>${i.description}</td>
-					<td><a class="" href="EditControllerView?id=<c:out value='${i.id}' />">Select</a></td>
+					<td>
+						<a class="" href="EditControllerView?id=<c:out value="${i.id}" />">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="" href="EditControllerView?id=<c:out value="${i.id}" />">Delete</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
