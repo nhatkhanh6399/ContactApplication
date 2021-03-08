@@ -12,10 +12,17 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
+	<nav class="navbar navbar-light bg-dark justify-content-between">
+	  	<a class="navbar-brand text-light" href="contact">Home</a>
+	  	<form class="form-inline">
+		    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	  	</form>
+	</nav>
 	<div class="container-fluid">
 		<h1 class="mx-auto text-center my-3">Contact Management</h1>
 		
-		<a class="btn btn-success mb-3 mr-0 float-right" href="AddContactView">Add contact</a>
+		<a class="btn btn-success mb-3 mr-0 float-right" href="contact?action=new">Add contact</a>
 		<table class="table table-striped table-hover table-bordered">
 			<tr>
 				<th>ID</th>
@@ -38,8 +45,8 @@
 					<td>${i.phoneNumber}</td>
 					<td>${i.description}</td>
 					<td>
-						<a class="" href="EditControllerView?id=<c:out value="${i.id}" />">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="" href="EditControllerView?id=<c:out value="${i.id}" />">Delete</a>
+						<a class="" href="contact?action=getInfo&id=<c:out value="${i.id}" />">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="" href="contact?action=delete&id=<c:out value="${i.id}" />">Delete</a>
 					</td>
 				</tr>
 			</c:forEach>

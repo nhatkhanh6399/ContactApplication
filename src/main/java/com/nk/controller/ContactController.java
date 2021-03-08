@@ -1,6 +1,7 @@
 package com.nk.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import com.nk.dto.ContactDTO;
 import com.nk.service.ContactService;
@@ -33,10 +35,31 @@ public class ContactController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action") != null ? request.getParameter("action") : "none";
+		
 		try {
-			this.getListContact(request, response);
+			switch (action) {
+			case "new":
+				RequestDispatcher rd = request.getRequestDispatcher("newContact.jsp");
+				rd.forward(request, response);
+				break;
+			case "insert":
+				this.addContact(request, response);
+				break;
+			case "update":
+				this.updateContact(request, response);
+				break;
+			case "delete":
+				this.deleteContact(request, response);
+				break;
+			case "getInfo":
+				this.getInfo(request, response);
+				break;
+			default:
+				this.getListContact(request, response);
+				break;
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -55,6 +78,58 @@ public class ContactController extends HttpServlet {
 		request.setAttribute("listContact", listEmp);
 		RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 		rd.forward(request, response);
+	}
+	
+	private void addContact(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		String fName = request.getParameter("firstName");
+		String lName = request.getParameter("lastName");
+		Date date = Date.valueOf(request.getParameter("birthDate"));
+		boolean gen = false;
+		String sex = request.getParameter("sex");
+		if(sex.equalsIgnoreCase("male"))
+			gen = true;
+		String phoneNumber = request.getParameter("phoneNumber");
+		String des = request.getParameter("description");
+		ContactDTO newContact = new ContactDTO(fName, lName, date, gen, phoneNumber, des);
+		
+		this.contactService.addNewContact(newContact);
+		response.sendRedirect("contact");
+	}
+	
+	private void updateContact(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		int id = Integer.parseInt(request.getParameter("id"));
+		String fName = request.getParameter("firstName");
+		String lName = request.getParameter("lastName");
+		Date date = Date.valueOf(request.getParameter("birthDate"));
+		String sex = request.getParameter("sex");
+		boolean gen = false;
+		System.out.println(sex);
+		if(sex.equalsIgnoreCase("male"))
+			gen = true;
+		System.out.println(gen);
+		String phoneNumber = request.getParameter("phoneNumber");
+		String des = request.getParameter("description");
+		ContactDTO contact = new ContactDTO(id, fName, lName, date, gen, phoneNumber, des);
+		this.contactService.updateContact(contact);
+		response.sendRedirect("contact");
+	}
+	
+	private void getInfo(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		ContactDTO existingContact = this.contactService.getContactById(id);
+		request.setAttribute("contact", existingContact);
+		RequestDispatcher rd = request.getRequestDispatcher("newContact.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void deleteContact(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		this.contactService.deleteContact(id);
+		response.sendRedirect("contact");
 	}
 
 }

@@ -9,7 +9,7 @@ public interface ContactDAO {
 	List<ContactDTO> getAllContacts() throws SQLException;
 	boolean addNewContact(ContactDTO newContact) throws SQLException;
 	boolean updateContact(ContactDTO contact) throws SQLException;
-	boolean deleteContact(ContactDTO contact) throws SQLException;
+	boolean deleteContact(int id) throws SQLException;
 	ContactDTO getContactById(int id) throws SQLException;
 	
 }

@@ -83,11 +83,11 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public boolean deleteContact(ContactDTO contact) throws SQLException {
+	public boolean deleteContact(int id) throws SQLException {
 		database.connect();
 		String sql = "DELETE FROM Employees WHERE ID = ?";
 		PreparedStatement statement = database.jdbcConnection.prepareStatement(sql);
-		statement.setInt(1, contact.getId());
+		statement.setInt(1, id);
 		
 		if(statement.executeUpdate() > 0) return true;
 		statement.close();

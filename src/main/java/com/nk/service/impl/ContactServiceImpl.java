@@ -31,8 +31,8 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public boolean deleteContact(ContactDTO contact) throws SQLException {
-		return this.contactDAO.deleteContact(contact);
+	public boolean deleteContact(int id) throws SQLException {
+		return this.contactDAO.deleteContact(id);
 	}
 
 	@Override
