@@ -86,14 +86,16 @@ public class ContactController extends HttpServlet {
 		String fName = request.getParameter("firstName");
 		String lName = request.getParameter("lastName");
 		Date date = Date.valueOf(request.getParameter("birthDate"));
-		boolean gen = false;
-		String sex = request.getParameter("sex");
-		if(sex.equalsIgnoreCase("male"))
-			gen = true;
+		int check = 0;
+		String gender = request.getParameter("gender");
+		if (gender.equalsIgnoreCase("male")) {
+			check = 1;
+		} else if(gender.equalsIgnoreCase("baloon")) {
+			check = 2;
+		}
 		String phoneNumber = request.getParameter("phoneNumber");
 		String des = request.getParameter("description");
-		ContactDTO newContact = new ContactDTO(fName, lName, date, gen, phoneNumber, des);
-		
+		ContactDTO newContact = new ContactDTO(fName, lName, date, check, phoneNumber, des);
 		this.contactService.addNewContact(newContact);
 		response.sendRedirect("contact");
 	}
@@ -105,15 +107,17 @@ public class ContactController extends HttpServlet {
 		String fName = request.getParameter("firstName");
 		String lName = request.getParameter("lastName");
 		Date date = Date.valueOf(request.getParameter("birthDate"));
-		String sex = request.getParameter("sex");
-		boolean gen = false;
-		System.out.println(sex);
-		if(sex.equalsIgnoreCase("male"))
-			gen = true;
-		System.out.println(gen);
+		int check = 0;
+		String gender = request.getParameter("gender");
+		if (gender.equalsIgnoreCase("male")) {
+			check = 1;
+		} else if(gender.equalsIgnoreCase("baloon")) {
+			check = 2;
+		}
 		String phoneNumber = request.getParameter("phoneNumber");
 		String des = request.getParameter("description");
-		ContactDTO contact = new ContactDTO(id, fName, lName, date, gen, phoneNumber, des);
+		System.out.println(des);
+		ContactDTO contact = new ContactDTO(id, fName, lName, date, check, phoneNumber, des);
 		this.contactService.updateContact(contact);
 		response.sendRedirect("contact");
 	}

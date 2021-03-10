@@ -41,9 +41,9 @@ public class AddController extends HttpServlet {
 			String lName = request.getParameter("lastName");
 			Date date = Date.valueOf(request.getParameter("birthDate"));
 			String sex = request.getParameter("sex");
-			boolean gen = false;
+			int gen = 0;
 			if(sex == "Male")
-				gen = true;
+				gen = 1;
 			String phoneNumber = request.getParameter("phoneNumber");
 			String des = request.getParameter("description");
 			ContactDTO newContact = new ContactDTO(fName, lName, date, gen, phoneNumber, des);

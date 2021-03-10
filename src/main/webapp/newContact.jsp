@@ -32,11 +32,11 @@
 			<div class="col-md-6">
 				<c:if test="${contact != null }">
 					<h1 class="mx-auto text-center my-3">Edit Contact</h1>
-					<form action="contact?action=update" method="post">
+					<form action="contact?action=update" method="post" accept-charset="UTF-8">
 				</c:if>
 				<c:if test="${contact == null }">
 					<h1 class="mx-auto text-center my-3">Add New Contact</h1>
-					<form action="contact?action=insert" method="post">
+					<form action="contact?action=insert" method="post" accept-charset="UTF-8">
 				</c:if>
 					<c:if test="${contact != null }">
 						<div class="form-group">
@@ -45,21 +45,22 @@
 					</c:if>
 						<div class="form-group">
 							<label>First Name</label>
-							<input type="text" class="form-control" name="firstName" value="${contact.firstName}">
+							<input type="text" class="form-control" name="firstName" value="${contact.firstName}" required>
 						</div>
 						<div class="form-group">
 							<label>Last Name</label>
 							<input type="text" class="form-control" name="lastName" value="${contact.lastName}">
 						</div>
 						<div class="form-group">
-							<label>Birth date</label>
-							<input type="date" class="form-control" name="birthDate" value="${contact.birthdate}">
+							<label>Birth Date</label>
+							<input type="date" class="form-control" name="birthDate" value="${contact.birthdate}" required>
 						</div>
 						<div class="form-group">
-						<label>Sex</label>
-						<select class="form-control" name="sex">
-							<option <c:if test="${contact.sex == true}"> selected</c:if>>Male</option>
-							<option <c:if test="${contact.sex == false}"> selected</c:if>>Female</option>
+						<label>Gender</label>
+						<select class="form-control" name="gender">
+							<option <c:if test="${contact.gender == 1}"> selected</c:if>>Male</option>
+							<option <c:if test="${contact.gender == 0}"> selected</c:if>>Female</option>
+							<option <c:if test="${contact.gender == 2}"> selected</c:if>>Baloon</option>
 						</select>
 					</div>
 						<div class="form-group">

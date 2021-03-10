@@ -32,10 +32,10 @@ public class ContactDAOImpl implements ContactDAO {
 				String firstName = resultSet.getString("FirstName");
 				String lastName = resultSet.getString("LastName");
 				Date birthdate = resultSet.getDate("Birthday");
-				boolean sex = resultSet.getBoolean("Sex");
+				int gender = resultSet.getInt("Sex");
 				String phoneNumber = resultSet.getString("Phone");
 				String description = resultSet.getNString("About");
-				ContactDTO contact = new ContactDTO(id, firstName, lastName, birthdate, sex, phoneNumber, description);
+				ContactDTO contact = new ContactDTO(id, firstName, lastName, birthdate, gender, phoneNumber, description);
 				listContact.add(contact);
 			}
 			resultSet.close();
@@ -55,7 +55,7 @@ public class ContactDAOImpl implements ContactDAO {
 		statement.setString(1, newContact.getFirstName());
 		statement.setString(2, newContact.getLastName());
 		statement.setDate(3, newContact.getBirthdate());
-		statement.setBoolean(4, newContact.isSex());
+		statement.setInt(4, newContact.getGender());
 		statement.setString(5, newContact.getPhoneNumber());
 		statement.setString(6, newContact.getDescription());
 		
@@ -72,7 +72,7 @@ public class ContactDAOImpl implements ContactDAO {
 		statement.setString(1, contact.getFirstName());
 		statement.setString(2, contact.getLastName());
 		statement.setDate(3, contact.getBirthdate());
-		statement.setBoolean(4, contact.isSex());
+		statement.setInt(4, contact.getGender());
 		statement.setString(5, contact.getPhoneNumber());
 		statement.setString(6, contact.getDescription());
 		statement.setInt(7, contact.getId());
@@ -106,7 +106,7 @@ public class ContactDAOImpl implements ContactDAO {
 			String firstName = resultSet.getString("FirstName");
 			String lastName = resultSet.getString("LastName");
 			Date birthdate = resultSet.getDate("Birthday");
-			boolean sex = resultSet.getBoolean("Sex");
+			int sex = resultSet.getInt("Sex");
 			String phoneNumber = resultSet.getString("Phone");
 			String description = resultSet.getNString("About");
 			contact = new ContactDTO(id, firstName, lastName, birthdate, sex, phoneNumber, description);
