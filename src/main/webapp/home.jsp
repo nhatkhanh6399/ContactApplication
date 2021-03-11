@@ -15,8 +15,8 @@
 <body>
 	<nav class="navbar navbar-light bg-dark justify-content-between">
 	  	<a class="navbar-brand text-light" href="contact">Home</a>
-	  	<form class="form-inline">
-		    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	  	<form class="form-inline" action="contact">
+		    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="txtSearch">
 		    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 	  	</form>
 	</nav>
@@ -53,7 +53,25 @@
 					<td>${i.description}</td>
 					<td>
 						<a class="" href="contact?action=getInfo&id=<c:out value="${i.id}" />">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<a class="" href="contact?action=delete&id=<c:out value="${i.id}" />" style="color: red">Delete</a>
+						<div class="modal fade" id="confirmDelete<c:out value="${i.id}" />" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+											        aria-hidden="true">
+					        <div class="modal-dialog" role="document">
+					            <div class="modal-content">
+					                <div class="modal-header">
+					                    <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+					                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					                        <span aria-hidden="true">x</span>
+					                    </button>
+					                </div>
+					                <div class="modal-body">Are you sure want to delete ${i.firstName} ${i.lastName}?</div>
+					                <div class="modal-footer">
+					                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					                    <a class="btn btn-primary" href="contact?action=delete&id=<c:out value="${i.id}" />">Delete</a>
+					                </div>
+					            </div>
+					        </div>
+					    </div>
+                        <a href="" style="color: red" data-toggle="modal" data-target="#confirmDelete<c:out value="${i.id}" />">Delete</a>
 					</td>
 				</tr>
 			</c:forEach>

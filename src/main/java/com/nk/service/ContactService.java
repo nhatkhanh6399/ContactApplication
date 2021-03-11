@@ -11,4 +11,5 @@ public interface ContactService {
 	boolean updateContact(ContactDTO contact) throws SQLException;
 	boolean deleteContact(int id) throws SQLException;
 	ContactDTO getContactById(int id) throws SQLException;
+	List<ContactDTO> findContact(String key) throws SQLException;
 }

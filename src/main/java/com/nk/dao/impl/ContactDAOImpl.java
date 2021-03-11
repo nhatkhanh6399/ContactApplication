@@ -116,7 +116,30 @@ public class ContactDAOImpl implements ContactDAO {
 		return contact;
 	}
 	
-	public static void main(String[] args) throws SQLException {
+	@Override
+	public List<ContactDTO> findContact(String key) throws SQLException {
+		List<ContactDTO> listContact = new ArrayList<ContactDTO>();
+		database.connect();
+		String sql = "SELECT * FROM Employees WHERE CONCAT(Employees.FirstName, ' ',Employees.LastName) LIKE '%" + key + "%'";
+		PreparedStatement statement = database.jdbcConnection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+		while(resultSet.next()) {
+			int id = resultSet.getInt("Id");
+			String firstName = resultSet.getString("FirstName");
+			String lastName = resultSet.getString("LastName");
+			Date birthdate = resultSet.getDate("Birthday");
+			int gender = resultSet.getInt("Sex");
+			String phoneNumber = resultSet.getString("Phone");
+			String description = resultSet.getNString("About");
+			ContactDTO contact = new ContactDTO(id, firstName, lastName, birthdate, gender, phoneNumber, description);
+			listContact.add(contact);
+		}
+		resultSet.close();
+		statement.close();
+		return listContact;
+	}
+	
+//	public static void main(String[] args) throws SQLException {
 //		ContactDAOImpl dao = new ContactDAOImpl();
 //		String str="1999-06-22";  
 //		Date date=Date.valueOf(str);;
@@ -128,10 +151,10 @@ public class ContactDAOImpl implements ContactDAO {
 //		for(ContactDTO o: list) {
 //			System.out.println(o.getFirstName() + "  ||  " + o.getLastName() + " || " + o.getDescription() + " || " + o.isSex());
 //		}
-		
 //		ContactDTO test = dao.getContactById(2);
 //		System.out.println(test);
-		
-	}
+//	}
+
+	
 	
 }

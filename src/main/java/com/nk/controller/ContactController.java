@@ -75,6 +75,9 @@ public class ContactController extends HttpServlet {
 	
 	private void getListContact(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		List<ContactDTO> listEmp = contactService.getAllContacts();
+		String key = request.getParameter("txtSearch");
+		if(key != null)
+			listEmp = contactService.findContact(key);
 		request.setAttribute("listContact", listEmp);
 		RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 		rd.forward(request, response);

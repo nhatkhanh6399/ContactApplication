@@ -1,6 +1,7 @@
 package com.nk.service.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.nk.dao.ContactDAO;
@@ -40,12 +41,16 @@ public class ContactServiceImpl implements ContactService {
 		return this.contactDAO.getContactById(id);
 	}
 	
-	public static void main(String[] args) throws SQLException {
-		ContactServiceImpl cn = new ContactServiceImpl();
-		List<ContactDTO> list = cn.getAllContacts();
-		for(ContactDTO o: list) {
-			System.out.println(o.getFirstName() + "  ||  " + o.getLastName() + " || " + o.getDescription());
-		}
+	@Override
+	public List<ContactDTO> findContact(String key) throws SQLException {
+		return this.contactDAO.findContact(key);
 	}
+//	public static void main(String[] args) throws SQLException {
+//		ContactServiceImpl cn = new ContactServiceImpl();
+//		List<ContactDTO> list = cn.getAllContacts();
+//		for(ContactDTO o: list) {
+//			System.out.println(o.getFirstName() + "  ||  " + o.getLastName() + " || " + o.getDescription());
+//		}
+//	}
 
 }
