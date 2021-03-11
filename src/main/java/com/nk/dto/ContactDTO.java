@@ -7,7 +7,7 @@ public class ContactDTO {
 	private String firstName;
 	private String lastName;
 	private Date birthdate;
-	private boolean sex;
+	private int gender;
 	private String phoneNumber;
 	private String description;
 	public int getId() {
@@ -34,11 +34,11 @@ public class ContactDTO {
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
-	public boolean isSex() {
-		return sex;
+	public int getGender() {
+		return gender;
 	}
-	public void setSex(boolean sex) {
-		this.sex = sex;
+	public void setGender(int gender) {
+		this.gender = gender;
 	}
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -52,25 +52,25 @@ public class ContactDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public ContactDTO(int id, String firstName, String lastName, Date birthdate, boolean sex, String phoneNumber,
+	public ContactDTO(int id, String firstName, String lastName, Date birthdate, int gender, String phoneNumber,
 			String description) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthdate = birthdate;
-		this.sex = sex;
+		this.gender = gender;
 		this.phoneNumber = phoneNumber;
 		this.description = description;
 	}
 	
-	public ContactDTO(String firstName, String lastName, Date birthdate, boolean sex, String phoneNumber,
+	public ContactDTO(String firstName, String lastName, Date birthdate, int gender, String phoneNumber,
 			String description) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthdate = birthdate;
-		this.sex = sex;
+		this.gender = gender;
 		this.phoneNumber = phoneNumber;
 		this.description = description;
 	}
