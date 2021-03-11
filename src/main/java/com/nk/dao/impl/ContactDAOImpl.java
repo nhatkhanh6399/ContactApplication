@@ -134,6 +134,7 @@ public class ContactDAOImpl implements ContactDAO {
 			ContactDTO contact = new ContactDTO(id, firstName, lastName, birthdate, gender, phoneNumber, description);
 			listContact.add(contact);
 		}
+		System.out.println("OK");
 		resultSet.close();
 		statement.close();
 		return listContact;
@@ -151,8 +152,10 @@ public class ContactDAOImpl implements ContactDAO {
 //		for(ContactDTO o: list) {
 //			System.out.println(o.getFirstName() + "  ||  " + o.getLastName() + " || " + o.getDescription() + " || " + o.isSex());
 //		}
+		
 //		ContactDTO test = dao.getContactById(2);
 //		System.out.println(test);
+		
 //	}
 
 	
